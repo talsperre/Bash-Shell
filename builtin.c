@@ -40,11 +40,14 @@ int shell_cd(char *args[]) {
 	return 1;
 }
 
-int shell_echo(char * args[]) {
-	
-	return 1;
+int shell_echo(char * args[]) 
+{
+	if (args[1]==NULL)
+	{
+		printf("\n");
+		return 1;
+		}
 }
-
 int shell_exit() {
 	return 0;
 }
