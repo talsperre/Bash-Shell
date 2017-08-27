@@ -16,7 +16,7 @@ char *lsh_pwd() {
 }
 
 int shell_cd(char *args[]) {
-	if (args[1] == NULL || strcmp(args[1], "~") == 0) {
+	if (args[1] == NULL || strcmp(args[1], " ") == 0 || strcmp(args[1], "") == 0 || strcmp(args[1], "~") == 0) {
 		if (chdir(home_dir) != 0) {
 			perror("Couldn't run cd command");
 		}
@@ -44,7 +44,7 @@ int shell_cd(char *args[]) {
 }
 
 int main () {
-	char *ar[] = {"cd", "~/Inception/"};
+	char *ar[] = {"cd", ".."};
 	printf("pwd: %s\n", lsh_pwd());
 	shell_cd(ar);
 	return 0;

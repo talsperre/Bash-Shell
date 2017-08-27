@@ -14,7 +14,7 @@ char *lsh_pwd() {
 }
 
 int shell_cd(char *args[]) {
-	if (args[1] == NULL || strcmp(args[1], "~") == 0) {
+	if (args[1] == NULL || strcmp(args[1], " ") == 0 || strcmp(args[1], "") == 0 || strcmp(args[1], "~") == 0) {
 		if (chdir(home_dir) != 0) {
 			perror("Couldn't run cd command");
 		}
@@ -36,6 +36,7 @@ int shell_cd(char *args[]) {
 		if (chdir(cd_dir) != 0) {
 			perror("Couldn't run cd command");
 		}
+		printf("%s\n", lsh_pwd());
 	}
 	return 1;
 }
@@ -46,7 +47,7 @@ int shell_echo(char * args[])
 	{
 		printf("\n");
 		return 1;
-		}
+	}
 }
 int shell_exit() {
 	return 0;

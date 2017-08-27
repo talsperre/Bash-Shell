@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
 int shell_echo(char * args[]) 
 {
 	if (args[1]==NULL)
@@ -12,6 +13,9 @@ int shell_echo(char * args[])
 	else
 	{
 		int i=1;
+		for (i = 1; args[i] != ""; i++) {
+			printf("%s ", args[i]);
+		}
 		while(args[i]!="")
 		{
 			write(1, args[i], strlen(args[i]));
