@@ -1,7 +1,6 @@
 #include "header.h"
 
-int read_parse() 
-{
+int read_parse() {
 	scanf("%1024[^\n]",inp_string);
     array_tokens = malloc(1024 * sizeof(char*));
 	
@@ -15,13 +14,9 @@ int read_parse()
 	int i;
 	
 	/* walk through other tokens */
-	while (token != NULL ) 
-	{
+	while (token != NULL ) {
 	    array_tokens[array_token_size++]=token;
 	    token = strtok(NULL,delim);
 	}
-
-	for (i = 0; i < array_token_size; i++) {
-		printf("%s\n",array_tokens[i]);
-	}
+	array_tokens[array_token_size++] = NULL;
 }
