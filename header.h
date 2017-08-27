@@ -7,22 +7,22 @@
 #include <errno.h>
 #include <string.h>
 #define MAXN 1234
+#define DELIM " \t\r\n\a"
 
 char *pwd();
 char *get_user_name();
 char *print_dir(char cur_dir[]);
+char **read_parse();
 int cd(char *args[]);
-int read_parse();
 int shell_prompt ();
 int echo(char *args[]);
+int shell_exit();
 
-char cd_dir[MAXN];
+//char cd_dir[MAXN];
 char hostname[HOST_NAME_MAX];
 char username[LOGIN_NAME_MAX];
 char home_dir[MAXN];
 char cur_dir[MAXN];
 char res[MAXN];
-char inp_string[1024];
-char ** array_tokens;
 
 int array_token_size;

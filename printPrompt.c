@@ -30,6 +30,6 @@ int shell_prompt () {
 		perror("gethostname");
 		return EXIT_FAILURE;
 	}
-	printf("%s@%s:%s$", get_user_name(), hostname, print_dir(pwd()));
+	printf("%s@%s:%s$ ", get_user_name(), hostname, print_dir(pwd()));
 	return 1;
 }

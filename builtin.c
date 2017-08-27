@@ -11,14 +11,14 @@ char *pwd() {
 }
 
 int cd(char *args[]) {
-	if (args[1] == NULL || strcmp(args[1], " ") == 0 || strcmp(args[1], "") == 0 || strcmp(args[1], "~") == 0) {
+	if (args[1] == NULL || strcmp(args[1], "~") == 0) {
 		if (chdir(home_dir) != 0) {
 			perror("Couldn't run cd command");
 		}
 	}
 	else {
-		
 		int k = 0;
+		char cd_dir[MAXN];
 		for (int j = 0; j < strlen(args[1]); j++) {
 			if (j == 0 && args[1][j] == '~') {
 				strcpy(cd_dir, home_dir);
@@ -28,12 +28,10 @@ int cd(char *args[]) {
 				cd_dir[k++] = args[1][j];
 			}
 		}
-		cd_dir[k++] = '\0';
-		
+		cd_dir[k] = '\0';
 		if (chdir(cd_dir) != 0) {
 			perror("Couldn't run cd command");
 		}
-		
 	}
 	return 1;
 }
@@ -51,4 +49,8 @@ int echo (char * args[]) {
 		printf("\n");
 	}
 	return 1;
+}
+
+int shell_exit() {
+	return 0;
 }
