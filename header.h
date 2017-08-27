@@ -19,3 +19,4 @@ char inp_string[1024];
 char ** array_tokens;
 int array_token_size;
 int read_parse();
+int echo (char * args[]);

@@ -29,11 +29,11 @@ int cd(char *args[]) {
 			}
 		}
 		cd_dir[k++] = '\0';
-		printf("%s\n", cd_dir);
+		
 		if (chdir(cd_dir) != 0) {
 			perror("Couldn't run cd command");
 		}
-		printf("%s\n", pwd());
+		
 	}
 	return 1;
 }
@@ -48,6 +48,7 @@ int echo (char * args[]) {
 		for (i = 1; args[i] != NULL; i++) {
 			printf("%s ", args[i]);
 		}
+		printf("\n");
 	}
 	return 1;
 }
