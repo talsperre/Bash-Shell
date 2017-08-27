@@ -1,15 +1,5 @@
-#include <unistd.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <pwd.h>
-#include <errno.h>
-#include <string.h>
-#define MAXN 1234
-char hostname[HOST_NAME_MAX];
-char username[LOGIN_NAME_MAX];
-char home_dir[MAXN];
-char res[MAXN];
+
+#include "header.h"
 
 char *get_user_name() {
 	uid_t uid = geteuid();
@@ -20,15 +10,7 @@ char *get_user_name() {
 	return "";
 }
 
-char *lsh_pwd() {
-	if (getcwd(home_dir, sizeof(home_dir)) != NULL) {
-		return home_dir;
-	}
-	else {
-		perror("getcwd() error");
-	}
-	return "";
-}
+
 
 char *print_dir(char cur_dir[]) {
 	if (strstr(cur_dir, home_dir) != NULL) {
@@ -45,7 +27,7 @@ char *print_dir(char cur_dir[]) {
 	}
 }
 
-int main () {
+/*int main () {
 	int check = gethostname(hostname, HOST_NAME_MAX);
 	if (check) {
 		perror("gethostname");
@@ -61,4 +43,4 @@ int main () {
 	printf("%s\n", print_dir("/home/fbd/College/Semester-3"));
 	printf("%s\n", print_dir("/home/fbd/College/Semester-3/OS/Assignment1"));
 	return 0;
-}
+}*/

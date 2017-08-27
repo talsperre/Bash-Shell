@@ -5,7 +5,7 @@
 #define MAXN 1234
 char home_dir[MAXN];
 
-char *lsh_pwd() {
+char *pwd() {
 	if (getcwd(home_dir, sizeof(home_dir)) != NULL) {
 		return home_dir;
 	}
@@ -15,7 +15,7 @@ char *lsh_pwd() {
 	return "";
 }
 
-int shell_cd(char *args[]) {
+int cd(char *args[]) {
 	if (args[1] == NULL || strcmp(args[1], " ") == 0 || strcmp(args[1], "") == 0 || strcmp(args[1], "~") == 0) {
 		if (chdir(home_dir) != 0) {
 			perror("Couldn't run cd command");
