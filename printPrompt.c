@@ -1,4 +1,3 @@
-
 #include "header.h"
 
 char *get_user_name() {
@@ -9,8 +8,6 @@ char *get_user_name() {
 	}
 	return "";
 }
-
-
 
 char *print_dir(char cur_dir[]) {
 	if (strstr(cur_dir, home_dir) != NULL) {
@@ -25,6 +22,16 @@ char *print_dir(char cur_dir[]) {
 	else {
 		return cur_dir;
 	}
+}
+
+int shell_prompt () {
+	int check = gethostname(hostname, HOST_NAME_MAX);
+	if (check) {
+		perror("gethostname");
+		return EXIT_FAILURE;
+	}
+	printf("%s@%s:%s$", get_user_name(), hostname, print_dir(pwd()));
+	return 1;
 }
 
 /*int main () {

@@ -1,8 +1,8 @@
 #include "header.h"
 
 char *pwd() {
-	if (getcwd(home_dir, sizeof(home_dir)) != NULL) {
-		return home_dir;
+	if (getcwd(cur_dir, sizeof(cur_dir)) != NULL) {
+		return cur_dir;
 	}
 	else {
 		perror("getcwd() error");
@@ -39,7 +39,7 @@ int cd(char *args[]) {
 }
 
 int echo (char * args[]) {
-	if (args[1]==NULL) {
+	if (args[1] == NULL) {
 		printf("\n");
 		return 1;
 	}
