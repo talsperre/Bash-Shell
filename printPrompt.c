@@ -33,21 +33,3 @@ int shell_prompt () {
 	printf("%s@%s:%s$", get_user_name(), hostname, print_dir(pwd()));
 	return 1;
 }
-
-/*int main () {
-	int check = gethostname(hostname, HOST_NAME_MAX);
-	if (check) {
-		perror("gethostname");
-		return EXIT_FAILURE;
-	}
-	printf("%s@%s:~$\n", get_user_name(), hostname);
-	printf("pwd: %s\n", lsh_pwd());
-	printf("%s\n", print_dir("/home/fbd/College/Semester-3/OS/Assignment2"));
-	printf("%s\n", print_dir("/home/fbd/College/Semester-3/OS/Assignment2/a.c"));
-	printf("%s\n", print_dir("/home/fbd/College/Semester-3/OS/Assignment2/hello"));
-	printf("%s\n", print_dir("/home/fbd/College/Semester-3/OS/Assignment2/hello/hello.txt"));
-	printf("%s\n", print_dir("/home/fbd"));
-	printf("%s\n", print_dir("/home/fbd/College/Semester-3"));
-	printf("%s\n", print_dir("/home/fbd/College/Semester-3/OS/Assignment1"));
-	return 0;
-}*/
