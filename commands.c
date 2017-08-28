@@ -126,7 +126,6 @@ int ls (char **args) {
 }
 
 int main(int argc, char const *argv[]) {
-	//char *ar[] = {"ls", "/home/fbd", NULL};
 	char *ar[] = {"ls", "/home/fbd" , "-l", "-a", NULL};
 	ls(ar);
 	return 0;

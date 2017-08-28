@@ -1,6 +1,6 @@
 #include "header.h"
 
-char ** read_parse() {
+/*char ** read_parse() {
 	char tmp;
 	char inp_string[1025];
 	scanf("%c%1024[^\n]", &tmp, inp_string);
@@ -23,9 +23,8 @@ char ** read_parse() {
 	}
 	array_tokens[array_token_size] = NULL;
 	return array_tokens;
-}
+}*/
 
-/*
 
 char ** read_parse() {
 	char *inp_string = NULL;
@@ -46,4 +45,4 @@ char ** read_parse() {
 	}
 	tokens[pos] = NULL;
 	return tokens;
-}*/
+}
