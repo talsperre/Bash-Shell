@@ -26,6 +26,8 @@ int cd(char *args[]);
 int shell_prompt ();
 int echo(char *args[]);
 int shell_exit();
+int ls(char *args[]);
+int pinfo(char *args[]);
 
 typedef struct process {
 	pid_t pid;
@@ -47,4 +49,4 @@ char cur_dir[MAXN];
 char res[MAXN];
 
 int array_token_size;
-int process_idx = 1;
+int proc_idx;

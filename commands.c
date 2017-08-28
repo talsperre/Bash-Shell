@@ -69,15 +69,9 @@ int ls (char **args) {
 		}
 	}
 	if (!flag) {
-		char pwd_dir[MAXN];
-		if (getcwd(pwd_dir, sizeof(pwd_dir)) != NULL) {
-			printf("%s\n", pwd_dir);
-			directory = opendir(pwd_dir);
-			strcpy(dir_name, pwd_dir);
-		}
-		else {
-			perror("getcwd() error");
-		}
+		pwd();
+		directory = opendir(cur_dir);
+		strcpy(dir_name, cur_dir);
 	}
 	if (is_l) {
 		while ((dir = readdir(directory)) != NULL) {
@@ -123,10 +117,4 @@ int ls (char **args) {
 		}
 	}
 	return 1;
-}
-
-int main(int argc, char const *argv[]) {
-	char *ar[] = {"ls", "/home/fbd" , "-l", "-a", NULL};
-	ls(ar);
-	return 0;
 }

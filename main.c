@@ -8,9 +8,9 @@ int launch (char **args) {
 		if (strcmp(args[i], "&") == 0 && args[i+1] == NULL) {
 			is_background = 1;
 			args[i] = NULL;
-			array_process[process_idx].pid = pid;
-			strcpy(array_process[process_idx].name, args[0]);
-			process_idx++;
+			array_process[proc_idx].pid = pid;
+			strcpy(array_process[proc_idx].name, args[0]);
+			proc_idx++;
 		}
 	}
 	if (pid == 0) {
@@ -40,7 +40,6 @@ int execute(char **args) {
 		return 1;
 	}
 	if (strcmp(args[0], "cd") == 0) {
-		printf("args[1]: %s\n", args[1]);
 		cd(args);
 	}
 	else if (strcmp(args[0], "echo") == 0) {
@@ -52,6 +51,9 @@ int execute(char **args) {
 	else if (strcmp(args[0], "exit") == 0) {
 		shell_exit();
 	}
+	else if (strcmp(args[0], "ls") == 0) {
+		ls(args);
+	}
 	else {
 		return launch(args);
 	}
@@ -60,6 +62,7 @@ int execute(char **args) {
 int main() {
 	int status;
 	pwd();
+	proc_idx = 1;
 	strcpy(home_dir, cur_dir);
 	do {
 		shell_prompt();
