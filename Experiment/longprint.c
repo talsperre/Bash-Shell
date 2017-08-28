@@ -1,0 +1,6 @@
+#include <stdio.h>
+
+int main () {
+	printf("bhasdjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhsadaskdbaskjdbahsdbashdsdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n");
+	return 0;
+}
