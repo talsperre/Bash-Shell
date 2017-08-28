@@ -13,6 +13,7 @@ char *pwd();
 char *get_user_name();
 char *print_dir(char cur_dir[]);
 char **read_parse();
+char ** array_tokens;
 int cd(char *args[]);
 int shell_prompt ();
 int echo(char *args[]);

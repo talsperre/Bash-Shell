@@ -34,9 +34,18 @@ int process_idx = 0;
 }*/
 
 int launch (char **args) {
+	int i;
+
 	pid_t pid, wpid;
-	int is_background = 0, i, status;
+	int is_background = 0,  status;
 	pid = fork();
+
+	for (i=0;args[i]!=NULL;i++)
+	{
+			printf("FORK: %s %d\n",args[i],pid);
+	}
+
+
 	for (i = 0; args[i] != NULL; i++) {
 		if (strcmp(args[i], "&") == 0 && args[i+1] == NULL) {
 			is_background = 1;
@@ -48,6 +57,19 @@ int launch (char **args) {
 	}
 	//printf("pid: %d, is_background: %d\n", pid, is_background);
 	if (pid == 0) {
+
+		for (i=0;args[i]!=NULL;i++)
+		{
+			char temp;
+			scanf("%c",&temp);
+			printf("%s\n",args[i]);
+		}
+
+		for (i=0;array_tokens[i]!=NULL;i++)
+		{
+			printf("%s\n",array_tokens[i]);
+		}
+				
 		if (execvp(args[0], args) == -1) {
 			perror("Couldn't run the command");
 		}
@@ -57,6 +79,10 @@ int launch (char **args) {
 		perror("Couldn't Fork");
 	}
 	else {
+		for (i=0;args[i]!=NULL;i++)
+		{
+			printf("Parent:%s\n",args[i]);
+		}
 		if (is_background) {
 			//wait(NULL);
 			return 1;
@@ -71,6 +97,8 @@ int launch (char **args) {
 }
 
 int execute(char **args) {
+	int i;
+	
 	if (args[0] == NULL) {
 		return 1;
 	}
