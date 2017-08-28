@@ -39,7 +39,14 @@ char const * sperm(__mode_t mode) {
     return local_buff;
 }
 
-int pinfo (char **args) {
+int pinfo (char **args) 
+{
+	if(args[1]==NULL)
+	{
+		args[1]=curr_pid;
+		args[2]=NULL;
+	}
+
 	return 1;
 }
 

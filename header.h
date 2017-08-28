@@ -50,3 +50,4 @@ char res[MAXN];
 
 int array_token_size;
 int proc_idx;
+int curr_pid;
