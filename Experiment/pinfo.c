@@ -23,7 +23,7 @@ int main()
 	int pid;
 	char ans[1024];
 	//cin>>pid;
-	pid=getpid();
+	pid=2030;
 
 	char* name1 = (char*)calloc(1024,sizeof(char));
 	if(name1)
@@ -60,7 +60,7 @@ int main()
 	                    name2[size-1]='\0';
 	            }
 	        }
-	            fclose(f);
+	        fclose(f);
 	}
 	//printf("%s",name2);
 	int pos=0;
@@ -84,16 +84,18 @@ int main()
 		{
 			printf("Memory -- %s\n",tokens[i+1]);
 		}
-		if(strncmp(tokens[i],"St",2)==0)
+		if(strcmp(tokens[i],"Status:",2)==0)
 		{
 
 			printf("Status -- %s\n",tokens[i+1]);
 		}
 	}
 	printf("Executable Path -- ");
+
 	char path[PATH_MAX];
 	char dest[PATH_MAX];
-	memset(dest,0,sizeof(dest)); // readlink does not null terminate!
+	memset(dest,0,sizeof(dest)); 
+	// readlink does not null terminate!
 	struct stat info;
 		
 	sprintf(path, "/proc/%d/exe", pid);
@@ -102,7 +104,6 @@ int main()
 	  else {
 	    printf("%s\n", dest);
 	  }
-	//printf("status -- %s\n",tokens[2]);
-	//printf("virtual memory -- %s\n",tokens[15]);
+	
 	
 }

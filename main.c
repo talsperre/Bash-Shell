@@ -54,6 +54,9 @@ int execute(char **args) {
 	else if (strcmp(args[0], "ls") == 0) {
 		ls(args);
 	}
+	else if (strcmp(args[0], "pinfo") == 0) {
+		pinfo(args);
+	}
 	else {
 		return launch(args);
 	}
