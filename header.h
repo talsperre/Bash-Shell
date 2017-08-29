@@ -28,6 +28,8 @@ int echo(char *args[]);
 int shell_exit();
 int ls(char *args[]);
 int pinfo(char *args[]);
+int launch (char **args); 
+int execute(char **args);
 
 typedef struct process {
 	pid_t pid;
