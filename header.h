@@ -30,6 +30,7 @@ int ls(char *args[]);
 int pinfo(char *args[]);
 int launch (char **args); 
 int execute(char **args);
+int loop();
 
 typedef struct process {
 	pid_t pid;
