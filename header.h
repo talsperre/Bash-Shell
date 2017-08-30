@@ -16,6 +16,9 @@
 #include <langinfo.h>
 #include <stdint.h>
 #include <signal.h>
+#include <sys/time.h>
+#include <unistd.h>  
+#include <signal.h>
 #define MAXN 1234
 #define DELIM " \t\r\n\a"
 
@@ -38,6 +41,7 @@ int execute(char **args);
 int loop();
 int initialize();
 int next_input();
+int nightswatch(int n);
 
 typedef struct process {
 	pid_t pid;

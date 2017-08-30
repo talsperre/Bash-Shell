@@ -58,6 +58,9 @@ int execute(char **args) {
 	else if (strcmp(args[0], "pinfo") == 0) {
 		pinfo(args);
 	}
+	else if (strcmp(args[0], "nightswatch") == 0) {
+		nightswatch(atoi(args[2]));
+	}
 	else {
 		return launch(args);
 	}
