@@ -6,6 +6,7 @@ int launch (char **args) {
 	pid = fork();
 	for (i = 0; args[i] != NULL; i++) {
 		if (strcmp(args[i], "&") == 0 && args[i+1] == NULL) {
+			signal(SIGCHLD, child_exit_handler);
 			is_background = 1;
 			args[i] = NULL;
 			array_process[proc_idx].pid = pid;

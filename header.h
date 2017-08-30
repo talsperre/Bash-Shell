@@ -15,22 +15,29 @@
 #include <locale.h>
 #include <langinfo.h>
 #include <stdint.h>
+#include <signal.h>
 #define MAXN 1234
 #define DELIM " \t\r\n\a"
+
+void child_exit_handler(int sig);
+void signal_handler(int sig);
 
 char *pwd();
 char *get_user_name();
 char *print_dir(char cur_dir[]);
 char **read_parse();
+
 int cd(char *args[]);
 int shell_prompt ();
 int echo(char *args[]);
 int shell_exit();
 int ls(char *args[]);
 int pinfo(char *args[]);
-int launch (char **args); 
+int launch (char **args);
 int execute(char **args);
 int loop();
+int initialize();
+int next_input();
 
 typedef struct process {
 	pid_t pid;

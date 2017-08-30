@@ -1,12 +1,11 @@
 #include "header.h"
 
 char ** read_parse() {
-	char *inp_string = NULL;
+	int pos = 0;
+	char *inp_string = NULL, *token;
 	ssize_t bufsize = 0;
 	getline(&inp_string, &bufsize, stdin);
-	int pos = 0;
 	char **tokens = malloc(bufsize * sizeof(char*));
-	char *token;
 	if (!tokens) {
 		fprintf(stderr, "malloc error\n");
 		exit(EXIT_FAILURE);

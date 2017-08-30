@@ -17,9 +17,9 @@ int cd(char *args[]) {
 		}
 	}
 	else {
-		int k = 0;
+		int k = 0, j;
 		char cd_dir[MAXN];
-		for (int j = 0; j < strlen(args[1]); j++) {
+		for (j = 0; j < strlen(args[1]); j++) {
 			if (j == 0 && args[1][j] == '~') {
 				strcpy(cd_dir, home_dir);
 				k = strlen(home_dir);
