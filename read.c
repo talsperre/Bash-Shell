@@ -6,6 +6,7 @@ char ** read_parse() {
 	ssize_t bufsize = 0;
 	getline(&inp_string, &bufsize, stdin);
 	char **tokens = malloc(bufsize * sizeof(char*));
+
 	if (!tokens) {
 		fprintf(stderr, "malloc error\n");
 		exit(EXIT_FAILURE);

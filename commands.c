@@ -59,19 +59,20 @@ int pinfo(char **args) {
     if (name2) {
         sprintf(name2, "/proc/%d/status", pid);
         FILE * f = fopen(name2, "r");
-        if (f < 0) {
-			fprintf(stderr, "Failed to open file \"%s\"\n", name2);
-			exit(1);
-		}
         if (f) {
             size_t size;
             size = fread(name2, sizeof(char), 1024, f);
             if (size > 0) {
                 if ('\n' == name2[size - 1]) {
-                    name2[size - 1] = '\0';
-                }
+                	name2[size - 1] = '\0';
+            	}
             }
         }
+        else {
+			fprintf(stderr, "Failed to open file \"%s\"\n", name2);
+			exit(1);
+		}
+ 
         fclose(f);
     }
 
@@ -219,4 +220,4 @@ int ls (char **args) {
 		}
 	}
 	return 1;
-}	
+}

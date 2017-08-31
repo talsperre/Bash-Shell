@@ -19,6 +19,8 @@
 #include <sys/time.h>
 #include <unistd.h>  
 #include <signal.h>
+#include <sys/ioctl.h>
+#include <termios.h>
 #define MAXN 1234
 #define DELIM " \t\r\n\a"
 
@@ -65,3 +67,4 @@ char res[MAXN];
 int array_token_size;
 int proc_idx;
 int curr_pid;
+int INTERVAL;
