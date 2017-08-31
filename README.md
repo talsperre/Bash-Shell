@@ -1,5 +1,30 @@
-# OS-Assignment-2
-Code for C based bash shell
+# C Shell
+Implementation of a C based bash shell using system calls
 
-https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html#Implementing-a-Shell
-https://github.com/flyingcharge/Bash
+## Getting Started
+To run the shell, write:
+```
+make
+```
+Followed by:
+```
+./shell
+```
+## Features
+- Bonus
+  - If background process exits then it displays the appropriate message to the user
+  - Command nightswatch (_Now my watch begins_) implemented
+- Modularized code
+  - Uses makefile for compilation process
+  - All header files and declarations in header.h
+- Proper error handling whenever required
+- Uniform coding style (Variable names, brackets styling)
+- Supports signal handling (eg. Ctrl-C returns Caught signal 2)
+  - ```Ctrl-C``` returns ```Caught signal 2, exiting```
+
+## Authors
+- **S. Shashank (20161103)**
+- **Kanay Gupta (20161098)**
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
