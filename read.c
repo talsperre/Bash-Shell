@@ -1,5 +1,10 @@
 #include "header.h"
 
+/* Function:
+	Reads and parses the input taken from the shell
+	Input: void
+	Output: array of pointers to individual components
+*/
 char ** read_parse() {
 	int pos = 0;
 	char *inp_string = NULL, *token;

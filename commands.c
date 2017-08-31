@@ -1,5 +1,11 @@
 #include "header.h"
 
+/* Function:
+	Prints the file permission using approprite file.
+	Input:
+	Output: 
+*/
+
 char const * sperm(__mode_t mode) {
 	static char local_buff[16] = {0};
 	int i = 0;
@@ -38,6 +44,11 @@ char const * sperm(__mode_t mode) {
 	else local_buff[i] = '-';
 	return local_buff;
 }
+/* Function:
+	Prints info about the file.
+	Input: Complete command
+	Output: prints the pid,status ,memory and path
+*/
 
 int pinfo(char **args) {
     int pid;
@@ -122,6 +133,12 @@ int pinfo(char **args) {
 
     return 1;
 }
+
+/* Function:
+	Prints the ouput of actual command
+	input: Complete command
+	Output: prints the ouptut of ls
+*/
 
 int ls (char **args) {
 	int i, is_a = 0, is_l = 0, flag = 0, j, k;

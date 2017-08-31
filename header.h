@@ -1,3 +1,10 @@
+/* Header file:
+	contains all the library required
+	all the functions
+	all the global objects
+*/
+
+
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>

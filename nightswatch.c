@@ -1,5 +1,9 @@
 #include "header.h"
-
+/* Function:
+	Gets the characteer from the stdin buffer
+	Input: void
+	Output: return asccii value
+*/
 int getch(void) {
 	struct termios oldattr, newattr;
 	int ch;
@@ -19,7 +23,11 @@ int getch(void) {
 		return ch;
 	}
 }
-
+/* Function:
+	Repetas the command after n seconds
+	Input: n - after how many seconds to run the command
+	Output: calls the funtion after n second and check for key q also
+*/
 int nightswatch(int n) {
 
 	INTERVAL = n * 1000;
@@ -57,7 +65,7 @@ int nightswatch(int n) {
 }
 
 /*
- * DoStuff
+ * Finds the dirty memory
  */
 
 void dirty(void) {
