@@ -44,6 +44,7 @@ char const * sperm(__mode_t mode) {
 	else local_buff[i] = '-';
 	return local_buff;
 }
+
 /* Function:
 	Prints info about the file.
 	Input: Complete command
@@ -136,7 +137,7 @@ int pinfo(char **args) {
 
 /* Function:
 	Prints the ouput of actual command
-	input: Complete command
+	Input: Complete command
 	Output: prints the ouptut of ls
 */
 
