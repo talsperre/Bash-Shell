@@ -22,6 +22,7 @@ Followed by:
 - Supports signal handling (eg. Ctrl-C returns Caught signal 2)
   - ```Ctrl-C``` returns ```Caught signal 2, exiting```
 - Properly documented
+- Unit tests for certain functions
 
 ## Authors
 - **S. Shashank (20161103)**
