@@ -1,5 +1,9 @@
 #include "header.h"
 
+/*
+	Returns the username of the user executing the shell
+*/
+
 char *get_user_name() {
 	uid_t uid = geteuid();
 	struct passwd *pw = getpwuid(uid);
@@ -8,6 +12,12 @@ char *get_user_name() {
 	}
 	return "";
 }
+
+/*
+	Input: A string consisting of current directory name
+	Output: Replaces '~' with the absolute path of the 
+	home (Directory where shell ir run)
+*/
 
 char *print_dir(char cur_dir[]) {
 	if (strstr(cur_dir, home_dir) != NULL) {
@@ -23,6 +33,10 @@ char *print_dir(char cur_dir[]) {
 		return cur_dir;
 	}
 }
+
+/*
+	Prints the main prompt of the shell in the infinte loop
+*/
 
 int shell_prompt () {
 	int check = gethostname(hostname, HOST_NAME_MAX);

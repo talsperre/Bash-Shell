@@ -1,5 +1,10 @@
 #include "header.h"
 
+/*
+	Input: Signal Number
+	Output: Returns if a child process has exited successfully or not
+*/
+
 void child_exit_handler (int sig) {
 	int status;
 	pid_t wpid = waitpid(-1, &status, WNOHANG);
@@ -12,6 +17,11 @@ void child_exit_handler (int sig) {
 		next_input();
 	}
 }
+
+/*
+	Input: Signal Number
+	Output: Checks for signals
+*/
 
 void signal_handler (int sig) {
 	printf("\nCaught signal %d, Exiting...\n", sig);

@@ -1,5 +1,10 @@
 #include "header.h"
 
+/*
+	Returns the current working directory
+	Also updates the value of cur_dir (A global string)
+*/
+
 char *pwd() {
 	if (getcwd(cur_dir, sizeof(cur_dir)) != NULL) {
 		return cur_dir;
@@ -9,6 +14,11 @@ char *pwd() {
 	}
 	return "";
 }
+
+/*
+	Input: An array of tokens
+	Output: Changes the working directory based on input
+*/
 
 int cd(char *args[]) {
 	if (args[1] == NULL || strcmp(args[1], "~") == 0) {
@@ -36,6 +46,11 @@ int cd(char *args[]) {
 	return 1;
 }
 
+/*
+	Input: An array of tokens
+	Output: Outputs the text on the shell
+*/
+
 int echo (char * args[]) {
 	if (args[1] == NULL) {
 		printf("\n");
@@ -50,6 +65,10 @@ int echo (char * args[]) {
 	}
 	return 1;
 }
+
+/*
+	Exits from the shell.
+*/
 
 int shell_exit() {
 	return 0;

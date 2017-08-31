@@ -1,5 +1,14 @@
 #include "header.h"
 
+/*
+	Input: Array of tokens
+	Responsible for launching the processes. 
+	Checks for '&':
+	If it exists => Opens the process in background
+	Else =>	Opens the process in foreground
+	Supports signal handling
+*/
+
 int launch (char **args) {
 	pid_t pid, wpid;
 	int is_background = 0, i, status;
@@ -35,6 +44,12 @@ int launch (char **args) {
 	}
 	return 1;
 }
+
+/*
+	Input: An array of tokens
+	Output: Executes the required process by calling system built-ins or
+	by calling the launch function
+*/
 
 int execute(char **args) {
 	if (args[0] == NULL) {
