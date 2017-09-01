@@ -13,7 +13,7 @@ Followed by:
 ## Features
 - Bonus
   - If background process exits then it displays the appropriate message to the user
-  - Command nightswatch (_Now my watch begins_) implemented
+  - Command nightswatch (_Now my watch begins_) implemented - dirty version is completed.
 - Modularized code
   - Uses makefile for compilation process
   - All header files and declarations in header.h

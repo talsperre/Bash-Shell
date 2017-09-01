@@ -4,6 +4,8 @@
 	Input: void
 	Output: return asccii value
 */
+void dirty(void) ;
+
 int getch(void) {
 	struct termios oldattr, newattr;
 	int ch;
