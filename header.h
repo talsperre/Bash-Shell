@@ -4,7 +4,6 @@
 	all the global objects
 */
 
-
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -38,6 +37,7 @@ char *pwd();
 char *get_user_name();
 char *print_dir(char cur_dir[]);
 char **read_parse();
+char **semicolon_parse();
 
 int cd(char *args[]);
 int shell_prompt ();
