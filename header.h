@@ -52,6 +52,7 @@ int loop();
 int initialize();
 int next_input();
 int nightswatch(int n);
+int pipeHandler(char * args[]);
 
 typedef struct process {
 	pid_t pid;

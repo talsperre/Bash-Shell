@@ -53,10 +53,20 @@ int launch (char **args) {
 */
 
 int execute(char **args) {
+	
 	if (args[0] == NULL) {
 		return 1;
 	}
-	if (strcmp(args[0], "cd") == 0) {
+	int cnt=0,i;
+	
+	for(i=0;args[i]!=NULL;i++){
+		if(strcmp(args[i],"|")==0)cnt++;
+	}
+	if(cnt!=0)
+	{
+		pipeHandler(args);
+	}
+	else if (strcmp(args[0], "cd") == 0) {
 		cd(args);
 	}
 	else if (strcmp(args[0], "echo") == 0) {
