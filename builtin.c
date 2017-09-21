@@ -71,5 +71,6 @@ int echo (char * args[]) {
 */
 
 int shell_exit() {
+	exit(EXIT_SUCCESS);
 	return 0;
 }

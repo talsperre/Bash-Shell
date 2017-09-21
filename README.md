@@ -11,6 +11,7 @@ Followed by:
 ./shell
 ```
 ## Features
+- Comma separated commands can be given as input. For e.g. echo hello ; ls -al will produce hello then the contents of the current directory.
 - Bonus
   - If background process exits then it displays the appropriate message to the user
   - Command nightswatch (_Now my watch begins_) implemented - dirty version is completed.

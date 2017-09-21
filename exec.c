@@ -24,6 +24,7 @@ int launch (char **args) {
 		}
 	}
 	if (pid == 0) {
+		args = redirection(args);
 		if (execvp(args[0], args) == -1) {
 			perror("Couldn't run the command");
 		}

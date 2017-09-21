@@ -10,8 +10,17 @@ int loop() {
 	do {
 		shell_prompt();
 		char **args;
-		args = read_parse();
-		status = execute(args);
+		args = semicolon_parse();
+		int i, j;
+		for (i = 0; args[i] != NULL; i++) {
+			char **argsi;
+			argsi = read_parse(args[i]);
+			status = execute(argsi);
+			if (!status) {
+				break;
+			}
+			free(argsi);
+		}
 		free(args);
 	} while (status);
 	return 1;
