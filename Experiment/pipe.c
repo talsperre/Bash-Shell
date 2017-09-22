@@ -10,11 +10,9 @@ int pipeHandler(char **args)
 	int even[2];
 	int i,j,k,flag=0;
 	int pipes=0;
-	int m;
 	
 	for(i=0;args[i]!=NULL;i++)
 	{
-
 		if(strcmp(args[i],"|")==0)
 		{
 			pipes++;		
@@ -29,10 +27,9 @@ int pipeHandler(char **args)
 		//printf("%d %d",i,j);
 		k=0;
 
-		for(j=i;strcmp(args[j],"|")!=0;)
+		for(j=i;args[j]!="|";j++)
 		{
 			comm[k++]=args[j];
-			j++;
 			if(args[j]==NULL)
 			{
 				flag=1;
@@ -41,8 +38,16 @@ int pipeHandler(char **args)
 		}
 		comm[k++]=NULL;
 		i=j+1;
+
+		/*for(m=0;m<k-1;m++)
+		{
+			printf("%s\n",comm[m]);
+		}*/
 		
+		
+
 		if(curr_pipe%2==1){pipe(odd);}
+		
 		else if(curr_pipe%2==0){pipe(even);}
 
 		pid=fork();
