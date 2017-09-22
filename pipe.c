@@ -84,7 +84,9 @@ int pipeHandler(char **args)
 
             	}
             }
-            if(execvp(comm[0],comm)==-1)
+            char ** comm1;
+    		comm1 = redirection(comm);
+            if(execvp(comm1[0],comm1)==-1)
             {
             	return 1;
             }	
