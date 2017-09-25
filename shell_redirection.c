@@ -7,7 +7,7 @@ char **redirection (char **args) {
 	for (i = 0; args[i] != NULL; i++) {
 		if (strcmp(args[i], "<") == 0) {
 			strcpy(in_file, args[i+1]);
-			args[i] = NULL; 
+			args[i] = NULL;
 			flag[0] = 1;
 		}
 		else if (strcmp(args[i], ">>") == 0) {
@@ -41,7 +41,7 @@ char **redirection (char **args) {
 		close(fd);
 	}
 	if (flag[2]) {
-		int fd = open(out_file, O_WRONLY | O_CREAT, 0644);
+		int fd = open(out_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0) {
 			fprintf(stderr, "Failed to open file \"%s\"\n", out_file);
 			exit(0);

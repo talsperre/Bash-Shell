@@ -39,6 +39,7 @@ char *print_dir(char cur_dir[]);
 char **read_parse();
 char **semicolon_parse();
 char **redirection();
+char **pinfo_data(int id);
 
 int cd(char *args[]);
 int shell_prompt ();
@@ -52,11 +53,19 @@ int loop();
 int initialize();
 int next_input();
 int nightswatch(int n);
+int shell_setenv(char *args[]);
+int shell_unsetenv(char *args[]);
+int jobs(char *args[]);
+int kjob(char *args[]);
+int overkill (char *args[]);
+int fg (char *args[]);
+int bg (char *args[]);
 int pipeHandler(char * args[]);
 
 typedef struct process {
 	pid_t pid;
 	char name[MAXN];
+	int is_null;
 } proc;
 proc array_process[MAXN];
 

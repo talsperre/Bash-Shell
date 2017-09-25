@@ -1,0 +1,29 @@
+README.md
+in.txt
+shell
+pipe.c
+header.h
+myoutput
+commands.c
+Experiment
+lines.txt
+b.txt
+main.c
+shell_redirection.c
+a.txt
+sig_handler.c
+nightswatch.c
+k.txt
+c.txt
+shell_loop.c
+out.txt
+exec.c
+printPrompt.c
+LICENSE
+semicolon_seperate.c
+makefile
+shell_initialize.c
+builtin.c
+read.c
+fbd@fbd-Lenovo-ideapad-510-15IKB:~$ fbd@fbd-Lenovo-ideapad-510-15IKB:~$ fbd@fbd-Lenovo-ideapad-510-15IKB:~$ fbd@fbd-Lenovo-ideapad-510-15IKB:~$ fbd@fbd-Lenovo-ideapad-510-15IKB:~$ fbd@fbd-Lenovo-ideapad-510-15IKB:~$ fbd@fbd-Lenovo-ideapad-510-15IKB:~$ fbd@fbd-Lenovo-ideapad-510-15IKB:~$ 
+Caught signal 2

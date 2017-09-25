@@ -88,7 +88,7 @@ char const * sperm(__mode_t mode) {
 /* Function:
 	Prints info about the file.
 	Input: Complete command
-	Output: prints the pid,status ,memory and path
+	Output: prints the pid, status, memory and path
 */
 
 int pinfo(char **args) {
@@ -105,7 +105,7 @@ int pinfo(char **args) {
 
     if (!name2) {
     	fprintf(stderr, "Allocation error\n");
-    	exit(EXIT_FAILURE);
+    	return 1;
     }
 
     if (name2) {
@@ -122,7 +122,7 @@ int pinfo(char **args) {
         }
         else {
 			fprintf(stderr, "Failed to open file \"%s\"\n", name2);
-			exit(1);
+			return 1;
 		}
  
         fclose(f);
@@ -135,7 +135,7 @@ int pinfo(char **args) {
 
     if (!tokens) {
     	fprintf(stderr, "Allocation error\n");
-    	exit(EXIT_FAILURE);
+    	return 1;
 	}
 
     token = strtok(name2, s);
@@ -151,9 +151,8 @@ int pinfo(char **args) {
         if (strcmp(tokens[i], "VmSize:") == 0) {
             printf("Memory -- %s {Virtual Memory}\n", tokens[i + 1]);
         }
-        if (strcmp(tokens[i], "Status:") == 0) {
-
-            printf("Status -- %s\n", tokens[i + 1]);
+        if (strcmp(tokens[i], "State:") == 0) {
+            printf("Status -- %s %s\n", tokens[i + 1], tokens[i + 2]);
         }
     }
     printf("Executable Path -- ");
@@ -171,7 +170,6 @@ int pinfo(char **args) {
     else {
         printf("%s\n", dest);
     }
-
     return 1;
 }
 
@@ -277,5 +275,194 @@ int ls (char **args) {
 			printf("%s\n", dir->d_name);
 		}
 	}
+	return 1;
+}
+
+int shell_setenv (char **args) {
+	int i;
+	for (i = 0; args[i] != NULL; i++);
+	if (i < 2 || i > 3) {
+		perror("Wrong no. of arguments for setenv command");
+		return 1;
+	}
+	if (setenv(args[1], args[2], 1) < 0) {
+		perror("Coudn't run setenv");
+	}
+	return 1;
+}
+
+int shell_unsetenv (char **args) {
+	int i;
+	for (i = 0; args[i] != NULL; i++);
+	if (i < 2) {
+		perror("Wrong no. of arguments for unsetenv command");
+		return 1;
+	}
+	if (unsetenv(args[1]) < 0) {
+		perror("Coudn't run unsetenv");
+	}
+	return 1;
+}
+
+char **pinfo_data (int id) {
+	int pid;
+    char **info_tokens = malloc(MAXN * sizeof(char*));
+    char * name2 = (char * ) calloc(10024, sizeof(char));
+    char ** tokens = malloc(200 * sizeof(char * ));
+    info_tokens[0] = NULL;
+
+	if (!info_tokens) {
+		fprintf(stderr, "malloc error\n");
+		exit(EXIT_FAILURE);
+	}
+    if (!name2) {
+    	fprintf(stderr, "Allocation error\n");
+    	return info_tokens;
+    }
+    if (!tokens) {
+    	fprintf(stderr, "Allocation error\n");
+    	return info_tokens;
+    }
+
+    pid = id;
+    
+    if (name2) {
+        sprintf(name2, "/proc/%d/status", pid);
+        FILE * f = fopen(name2, "r");
+        if (f) {
+            size_t size;
+            size = fread(name2, sizeof(char), 1024, f);
+            if (size > 0) {
+                if ('\n' == name2[size - 1]) {
+                	name2[size - 1] = '\0';
+            	}
+            }
+        }
+        else {
+			fprintf(stderr, "Failed to open file \"%s\"\n", name2);
+			return info_tokens;
+		}
+ 
+        fclose(f);
+    }
+
+    int pos = 0, info_pos = 0;
+    char * token;
+    char * tmp;
+    char s[3] = " \t\n";
+    token = strtok(name2, s);
+
+    while (token != NULL) {
+        tokens[pos] = token;
+        pos++;
+        token = strtok(NULL, s);
+    }
+    int i;
+
+    for (i = 0; i < pos; i++) {
+      	if (strcmp(tokens[i], "State:") == 0) {
+        	info_tokens[info_pos++] = tokens[i+2];
+        }
+    }
+
+    char path[PATH_MAX];
+    char dest[PATH_MAX];
+    memset(dest, 0, sizeof(dest));
+    // readlink does not null terminate!
+    struct stat info;
+
+    sprintf(path, "/proc/%d/exe", pid);
+    if (readlink(path, dest, PATH_MAX) == -1) {
+        perror("readlink");
+    }
+    else {
+    	info_tokens[info_pos++] = dest;
+    	info_tokens[info_pos++] = NULL;
+    }
+
+    return info_tokens;
+}
+
+int jobs (char **args) {
+	int pos;
+	for (pos = 1; pos < proc_idx; pos++) {
+		if (!array_process[pos].is_null) {
+			if (pinfo_data(array_process[pos].pid)) {
+				char **tokens = pinfo_data(array_process[pos].pid);
+				printf("[%d] %s %s [%d]\n", pos, tokens[0], tokens[1], array_process[pos].pid);
+			}
+			else {
+				continue;
+			}
+		}
+	}
+	return 1;
+}
+
+int kjob (char **args) {
+	int len = 0;
+	while (args[len] != NULL) len++;
+	if (len <= 2) {
+		perror("No. of arguments should be 3\n");
+		return 1;
+	}
+	int job_no = atoi(args[1]), sig_num = atoi(args[2]);
+	if (array_process[job_no].is_null) {
+		fprintf(stderr, "The process with job no: %d does not exist\n", job_no);
+		return 1;
+	}
+	if (sig_num != 9 || sig_num != 18 || sig_num != 19) {
+		array_process[job_no].is_null = 1;
+	}
+	kill(array_process[job_no].pid, sig_num);
+	return 1;
+}
+
+int overkill (char **args) {
+	int pos;
+	for (pos = 1; pos < proc_idx; pos++) {
+		if (!array_process[pos].is_null) {
+			kill(array_process[pos].pid, 9);
+			array_process[pos].is_null = 1;
+		}
+	}
+	return 1;
+}
+
+int fg (char **args) {
+	if (args[1] == NULL) {
+		perror("No. of arguments should be 2\n");
+		return 1;
+	}
+	int job_no = atoi(args[1]);
+	if (array_process[job_no].is_null) {
+		fprintf(stderr, "The process with job no: %d does not exist\n", job_no);
+		return 1;
+	}
+	array_process[job_no].is_null = 1;
+	int pid = array_process[job_no].pid;
+	pid_t wpid;
+	kill(pid, 18);
+	int status;
+	do {
+		wpid = waitpid(pid, &status, WUNTRACED);
+	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	return 1;
+}
+
+int bg (char **args) {
+	if (args[1] == NULL) {
+		perror("No. of arguments should be 2\n");
+		return 1;
+	}
+	int job_no = atoi(args[1]);
+	if (array_process[job_no].is_null) {
+		fprintf(stderr, "The process with job no: %d does not exist\n", job_no);
+		return 1;
+	}
+	array_process[job_no].is_null = 1;
+	int pid = array_process[job_no].pid;
+	pid_t wpid;
+	kill(pid, 18);
 	return 1;
 }

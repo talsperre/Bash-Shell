@@ -6,15 +6,18 @@
 */
 
 void child_exit_handler (int sig) {
-	int status;
+	int status, pos;
 	pid_t wpid = waitpid(-1, &status, WNOHANG);
 	if (wpid > 0 && WIFEXITED(status) == 0) {
 		fprintf(stderr, "\nProcess with pid: %d exited normally\n", wpid);
-		next_input();
 	}
 	if (wpid > 0 && WIFSIGNALED(status) == 0) {
 		fprintf(stderr, "\nProcess with pid: %d exited with signal %d\n", wpid, sig);
-		next_input();
+	}
+	for (pos = 1; pos < proc_idx; pos++) {
+		if (array_process[pos].pid == wpid) {
+			array_process[pos].is_null = 1;
+		}
 	}
 }
 
@@ -24,10 +27,9 @@ void child_exit_handler (int sig) {
 */
 
 void signal_handler (int sig) {
-	printf("\nCaught signal %d, Exiting...\n", sig);
-	exit(1);
+	printf("\nCaught signal %d\n", sig);
 }
 
 int next_input () {
-	loop();
+	return 1;
 }
