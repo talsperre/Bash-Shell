@@ -26,8 +26,23 @@ void child_exit_handler (int sig) {
 	Output: Checks for signals
 */
 
-void signal_handler (int sig) {
+// ctrl-c
+void ctrl_c_signal_handler (int sig) {
 	printf("\nCaught signal %d\n", sig);
+	if (is_foreground) {
+		kill(foreground_pid, SIGINT);
+	}
+}
+
+// ctrl-z
+void ctrl_z_signal_handler (int sig) {
+	printf("\nCaught signal %d\n", sig);
+	if (is_foreground) {
+		kill(foreground_pid, SIGTSTP);
+		array_process[proc_idx].pid = foreground_pid;
+		array_process[proc_idx].is_null = 0;
+		proc_idx++;
+	}
 }
 
 int next_input () {

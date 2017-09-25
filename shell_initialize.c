@@ -7,7 +7,9 @@
 */
 
 int initialize() {
-	signal(SIGINT, signal_handler);
+	is_foreground = 0;
+	signal(SIGINT, ctrl_c_signal_handler);
+	signal(SIGTSTP, ctrl_z_signal_handler);
 	pwd();
 	proc_idx = 1;
 	curr_pid=getpid();

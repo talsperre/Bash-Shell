@@ -39,9 +39,13 @@ int launch (char **args) {
 			return 1;
 		}
 		else {
+			is_foreground = 1;
+			foreground_pid = pid;
 			do {
 				wpid = waitpid(pid, &status, WUNTRACED);
-			} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+			// } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+			} while (!WIFEXITED(status) && !WIFSIGNALED(status) && !WIFSTOPPED(status));
+			is_foreground = 0;
 		}
 	}
 	return 1;
@@ -68,7 +72,7 @@ int execute(char **args) {
 			cnt1++;
 		}
 	}
-	if ( cnt != 0) {
+	if (cnt != 0) {
 		pipeHandler(args);
 	}
 	else if (strcmp(args[0], "cd") == 0) {

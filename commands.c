@@ -444,9 +444,13 @@ int fg (char **args) {
 	pid_t wpid;
 	kill(pid, 18);
 	int status;
+	is_foreground = 1;
+	foreground_pid = pid;
 	do {
 		wpid = waitpid(pid, &status, WUNTRACED);
-	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	// } while (!WIFEXITED(status) && !WIFSIGNALED(status) );
+	} while (!WIFEXITED(status) && !WIFSIGNALED(status) && !WIFSTOPPED(status));
+	is_foreground = 0;
 	return 1;
 }
 
@@ -460,7 +464,6 @@ int bg (char **args) {
 		fprintf(stderr, "The process with job no: %d does not exist\n", job_no);
 		return 1;
 	}
-	array_process[job_no].is_null = 1;
 	int pid = array_process[job_no].pid;
 	pid_t wpid;
 	kill(pid, 18);

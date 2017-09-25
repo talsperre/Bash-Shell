@@ -28,10 +28,12 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 #define MAXN 1234
+#define MAXIN 123456
 #define DELIM " \t\r\n\a"
 
 void child_exit_handler(int sig);
-void signal_handler(int sig);
+void ctrl_c_signal_handler(int sig);
+void ctrl_z_signal_handler(int sig);
 
 char *pwd();
 char *get_user_name();
@@ -67,7 +69,7 @@ typedef struct process {
 	char name[MAXN];
 	int is_null;
 } proc;
-proc array_process[MAXN];
+proc array_process[MAXIN];
 
 struct dirent *dir;
 struct stat st;
@@ -86,3 +88,5 @@ int array_token_size;
 int proc_idx;
 int curr_pid;
 int INTERVAL;
+int is_foreground;
+int foreground_pid;
